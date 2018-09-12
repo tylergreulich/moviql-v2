@@ -1,0 +1,22 @@
+# import { Movie } from '../movie/schema.graphql'
+
+type Comment {
+  _id: ID!
+  username: String
+  createdAt: String!
+  movieReview: String!
+  movieRating: Int!
+}
+
+type Mutation {
+  addComment(
+    _id: ID!
+    createdAt: String
+    movieReview: String!
+    movieRating: Int!
+  ): Movie!
+}
+
+type Query {
+  getComment(_id: ID!): Comment
+}

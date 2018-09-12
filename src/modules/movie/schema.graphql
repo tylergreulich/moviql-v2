@@ -1,0 +1,35 @@
+# import { Comment } from '../comment/schema.graphql'
+# import { Actor } from '../actor/schema.graphql'
+
+type Movie {
+  _id: ID!
+  title: String!
+  description: String!
+  releaseDate: String!
+  rating: Int
+  ## rating will be done via math operation from movieRating via comments
+  ## find average rating from movieRating divided by # of movieReviews
+  cast: [Actor!]
+  ## for the client => just make each cast member a chip component
+  ## have an input field below existing cast for adding new members
+  ## update with optomistic UI
+  comments: [Comment!]
+}
+
+type Query {
+  getMovies: [Movie!]
+  getMovie(_id: ID!): Movie
+}
+
+type Mutation {
+  addMovie(title: String!, description: String!, releaseDate: String): Movie!
+  editMovie(
+    _id: ID!
+    title: String
+    description: String
+    releaseDate: String
+  ): Movie!
+  ## for the UI when adding more cast members, handle it via mutation for the actor model
+  ## and append it to the list of cast members for the current movie
+  ## update with optomistic UI
+}

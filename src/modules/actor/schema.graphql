@@ -1,0 +1,11 @@
+# import { Movie } from '../movie/schema.graphql'
+
+type Actor {
+  _id: ID!
+  name: String!
+}
+
+type Mutation {
+  addActor(_id: ID!, name: String!): Movie
+  deleteActor(_id: ID!): Movie
+}

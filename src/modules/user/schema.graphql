@@ -1,0 +1,11 @@
+type User {
+  _id: ID!
+  email: String!
+  username: String!
+  isAdmin: Boolean
+}
+
+type Query {
+  getCurrentUser(_id: ID!): User
+  getAllUsers: [User!]!
+}
