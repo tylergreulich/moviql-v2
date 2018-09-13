@@ -2,8 +2,6 @@ import * as Validator from 'validator';
 import { User, AuthErrors } from '../interfaces/auth.interface';
 import { isEmpty } from './is-empty';
 
-import { createError } from 'apollo-errors';
-
 export const validateRegister = (data: User) => {
   let errors: AuthErrors = {};
 

@@ -26,7 +26,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^3.0.3",
+    "@material-ui/icons": "^3.0.1",
     "apollo-server-express": "2.0.0",
+    "apollo-upload-server": "^7.1.0",
     "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "concurrently": "^3.6.1",
@@ -41,6 +44,7 @@
     "mongoose": "^5.2.4",
     "ts-node": "^7.0.0",
     "ts-node-dev": "^1.0.0-pre.26",
+    "typeface-roboto": "^0.0.54",
     "typescript": "^3.0.1",
     "validator": "^10.5.0"
   },

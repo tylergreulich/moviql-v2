@@ -1,3 +1,4 @@
+import { isEmpty } from './../validation/is-empty';
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as cors from 'cors';
@@ -17,18 +18,23 @@ interface IExpressRequest extends express.Request {
   currentUser: any;
 }
 
-app.use(async (req: IExpressRequest, res, next) => {
-  const token = req.headers['authorization'];
-  if (typeof token !== null && typeof token !== 'undefined') {
-    try {
-      const currentUser = await jwt.verify(token, keys.SECRET);
-      req.currentUser = currentUser;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  next();
-});
+// app.use(async (req: IExpressRequest, res, next) => {
+//   const token = req.headers['authorization'];
+//   if (
+//     typeof token !== null &&
+//     typeof token !== 'undefined' &&
+//     token !== '' &&
+//     !isEmpty(token)
+//   ) {
+//     try {
+//       const currentUser = await jwt.verify(token, keys.SECRET);
+//       req.currentUser = currentUser;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+//   next();
+// });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

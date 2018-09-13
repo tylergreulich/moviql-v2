@@ -21,6 +21,12 @@ const UserSchema: Schema = new Schema({
     min: 6,
     max: 30
   },
+  favorites: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Movie'
+    }
+  ],
   date: {
     type: Date,
     default: Date.now

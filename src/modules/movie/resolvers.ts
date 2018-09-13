@@ -2,8 +2,6 @@ import { GQL } from '../../types/schema';
 import { ResolverMap } from '../../types/graphql-utils';
 import { validateMovieMutation } from '../../validation/movie';
 
-import { Schema } from 'mongoose';
-
 export const resolvers: ResolverMap = {
   Query: {
     getMovies: async (_, {}, { Movie }) => {
@@ -21,11 +19,12 @@ export const resolvers: ResolverMap = {
     addMovie: async (root, args, { Movie }) => {
       await validateMovieMutation(args);
 
-      const { title, description } = args;
+      const { title, description, movieImage } = args;
 
       const newMovie = await new Movie({
         title,
-        description
+        description,
+        movieImage
       }).save();
 
       return newMovie;
@@ -50,6 +49,18 @@ export const resolvers: ResolverMap = {
       } catch (error) {
         console.log(error);
       }
+    },
+    addMovieToFavorites: async (_, { _id, username }, { Movie, User }) => {
+      const user = await User.findOneAndUpdate(
+        { username },
+        {
+          $addToSet: {
+            favorites: _id
+          }
+        }
+      );
+
+      return user;
     }
   }
 };

@@ -8,6 +8,7 @@ export const validateMovie = (data: Movie) => {
 
   data.title = !isEmpty(data.title) ? data.title : '';
   data.description = !isEmpty(data.description) ? data.description : '';
+  data.movieImage = !isEmpty(data.movieImage) ? data.movieImage : '';
 
   if (!Validator.isLength(data.title, { min: 2, max: 30 })) {
     errors.title = 'Title must be between 2 and 30 characters';
@@ -23,6 +24,10 @@ export const validateMovie = (data: Movie) => {
 
   if (Validator.isEmpty(data.description)) {
     errors.description = 'Description field is required';
+  }
+
+  if (Validator.isEmpty(data.movieImage)) {
+    errors.movieImage = 'Movie Image field is required';
   }
 
   return { errors, isValid: isEmpty(errors) };

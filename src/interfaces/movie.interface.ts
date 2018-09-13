@@ -6,6 +6,7 @@ export interface Movie extends Document {
   _id: string;
   title: string;
   description: string;
+  movieImage: string;
   releaseDate: Date;
   rating?: Number;
   cast?: [Actor];
@@ -15,5 +16,6 @@ export interface Movie extends Document {
 export interface MovieErrors {
   title?: string;
   description?: string;
+  movieImage?: string;
   releaseDate?: Date;
 }

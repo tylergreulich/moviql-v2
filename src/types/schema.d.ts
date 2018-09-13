@@ -58,6 +58,7 @@ export namespace GQL {
     title: string;
     description: string;
     releaseDate: string;
+    movieImage: string;
     rating: number | null;
 
     /**
@@ -85,6 +86,7 @@ export namespace GQL {
     _id: string;
     email: string;
     username: string;
+    favorites: Array<IMovie>;
     isAdmin: boolean | null;
   }
 
@@ -96,6 +98,7 @@ export namespace GQL {
     loginUser: IToken | null;
     addMovie: IMovie;
     editMovie: IMovie;
+    addMovieToFavorites: boolean;
     registerUser: IToken | null;
   }
 
@@ -124,6 +127,7 @@ export namespace GQL {
     title: string;
     description: string;
     releaseDate?: string | null;
+    movieImage: string;
   }
 
   interface IEditMovieOnMutationArguments {
@@ -131,6 +135,11 @@ export namespace GQL {
     title?: string | null;
     description?: string | null;
     releaseDate?: string | null;
+  }
+
+  interface IAddMovieToFavoritesOnMutationArguments {
+    _id: string;
+    username: string;
   }
 
   interface IRegisterUserOnMutationArguments {

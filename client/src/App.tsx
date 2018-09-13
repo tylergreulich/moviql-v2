@@ -1,34 +1,26 @@
 import * as React from 'react';
-import './App.css';
+import { gql } from 'apollo-boost';
+import { Mutation } from 'react-apollo';
+import Dropzone from 'react-dropzone';
 
-interface AppState {
-  username: string;
-  password: string;
-}
+const uploadFileMutation = gql`
+  mutation($file: Upload!) {
+    uploadFile(file: $file)
+  }
+`;
 
-export class App extends React.Component<{}, AppState> {
-  public state: AppState = {
-    username: '',
-    password: ''
-  };
-
-  public onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    const { name, value } = event.currentTarget;
-    this.setState({
-      ...this.state,
-      [name]: value
-    });
-  };
-
+export default class App extends React.Component {
   public render() {
     return (
-      <form onSubmit={this.onSubmitHandler}>
-        <label>Username</label>
-        <input type="text" />
-        <label>Password</label>
-        <input type="text" />
-        <button type="submit">Submit</button>
-      </form>
+      <Mutation mutation={uploadFileMutation}>
+        {mutate => (
+          <Dropzone onDrop={([file]) => mutate({ variables: { file } })}>
+            <p>
+              Drag some files here to upload, or click to select files to upload
+            </p>
+          </Dropzone>
+        )}
+      </Mutation>
     );
   }
 }
