@@ -23,6 +23,7 @@ describe('movieResolvers', () => {
         _id: id,
         title: 'Test',
         description: 'Test',
+        movieImage: 'oeirjgiesurhu',
         releaseDate: new Date()
       });
 
@@ -44,12 +45,14 @@ describe('movieResolvers', () => {
           _id: id,
           title: 'Test One',
           description: 'Test One',
+          movieImage: 'aoeirgueirgh',
           releaseDate: new Date()
         },
         {
           _id: new mongoose.Types.ObjectId(),
           title: 'Test Two',
           description: 'Test Two',
+          movieImage: 'aieurgjioaerjhoith',
           releaseDate: new Date()
         }
       ]);
@@ -61,6 +64,52 @@ describe('movieResolvers', () => {
   });
 
   describe('addMovie', () => {
-    it('Should add a movie and return it', async () => {});
+    it('Should add a movie to the database and return it', async () => {
+      const newMovieArgs = {
+        title: 'New movie title',
+        description: 'The description of a new movie!!!!',
+        movieImage: 'oawijergioerjhoirth'
+      };
+
+      const results = await movieResolvers.Mutation.addMovie(
+        null,
+        newMovieArgs,
+        { Movie }
+      );
+
+      expect(results).toMatchObject(newMovieArgs);
+    });
+  });
+
+  describe('editMovie', () => {
+    it('Should edit the fields of a movie and return it', async () => {
+      const _id = mongoose.Types.ObjectId();
+
+      const movie = await Movie.create({
+        _id,
+        title: 'Random title',
+        description: 'This is a random descriptionnnn',
+        movieImage: 'oiaehjierohrsh',
+        releaseDate: new Date()
+      });
+
+      const updateMovieArgs = {
+        _id,
+        title: 'Changed title',
+        description: 'This is a changed descriptionnnn'
+      };
+
+      const results = await movieResolvers.Mutation.editMovie(
+        null,
+        updateMovieArgs,
+        { Movie }
+      );
+
+      expect(results).toMatchObject({
+        _id,
+        title: 'Changed title',
+        description: 'This is a changed descriptionnnn'
+      });
+    });
   });
 });

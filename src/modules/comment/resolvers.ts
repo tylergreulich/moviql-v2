@@ -11,18 +11,16 @@ export const resolvers: ResolverMap = {
   Mutation: {
     addComment: async (
       _,
-      args: GQL.IAddCommentOnMutationArguments,
+      { _id, movieReview, movieRating }: GQL.IAddCommentOnMutationArguments,
       { Movie, Comment }
     ) => {
-      const { _id, movieReview, movieRating } = args;
-
-      const newComment = await new Comment({
+      const newComment = new Comment({
         movieReview,
         movieRating,
         createdAt: new Date()
       });
 
-      const movie = await Movie.findOneAndUpdate(
+      const movie = await Movie.findByIdAndUpdate(
         { _id },
         {
           $addToSet: {

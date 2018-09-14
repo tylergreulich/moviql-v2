@@ -6,6 +6,6 @@ type Actor {
 }
 
 type Mutation {
-  addActor(_id: ID!, name: String!): Movie
-  deleteActor(_id: ID!): Movie
+  addActor(_id: ID!, name: String!): Actor
+  deleteActor(movieId: ID!, actorId: ID!): Actor
 }

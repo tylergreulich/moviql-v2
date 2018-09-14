@@ -27,8 +27,23 @@ export const resolvers: ResolverMap = {
     },
     deleteActor: async (
       _,
-      { _id }: GQL.IDeleteActorOnMutationArguments,
+      { movieId, actorId }: GQL.IDeleteActorOnMutationArguments,
       { Actor }
-    ) => {}
+    ) => {
+      const actor = await Actor.findByIdAndRemove({ actorId });
+
+      const movie = await Movie.findByIdAndUpdate(
+        { movieId },
+        {
+          $pull: {
+            cast: actorId
+          }
+        }
+      );
+
+      movie.save();
+
+      return actor;
+    }
   }
 };

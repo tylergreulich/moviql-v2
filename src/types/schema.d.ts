@@ -108,7 +108,8 @@ export namespace GQL {
   }
 
   interface IDeleteActorOnMutationArguments {
-    _id: string;
+    movieId: string;
+    actorId: string;
   }
 
   interface IAddCommentOnMutationArguments {
