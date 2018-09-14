@@ -6,9 +6,10 @@ export interface IMovie {
   title: string;
   description: string;
   movieImage: string;
-  releaseDate: Date;
+  releaseDate?: Date;
   rating?: number;
-  cast: [IActor];
-  likes: number;
-  comments: [IComment];
+  cast?: [IActor];
+  likes?: number;
+  comments?: [IComment];
+  onClick?: () => void;
 }

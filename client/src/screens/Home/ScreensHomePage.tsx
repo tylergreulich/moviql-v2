@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Query } from 'react-apollo';
-import getMovies from 'src/queries/getMovies';
+import getMovies from '../../queries/getMovies';
 import { GetAllMovieData } from 'src/interfaces/HomeScreen/HomeScreen.interface';
 import { IMovie } from '../../interfaces/shared/Movie.interface';
 
@@ -11,7 +11,7 @@ export default () => (
     <Query<GetAllMovieData> query={getMovies}>
       {({ data, loading, error }) => {
         if (loading || !data) {
-          return null;
+          return 'Loading...';
         }
 
         if (error) {

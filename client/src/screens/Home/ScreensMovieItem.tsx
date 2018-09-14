@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { IMovie } from 'src/interfaces/shared/Movie.interface';
-import { Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-export default (props: IMovie) => (
-  <Link to={`/movie/${props._id}`}>
+type MovieItemProps = IMovie & RouteComponentProps<any>;
+
+const MovieItem = (props: MovieItemProps) => (
+  <>
     <img
       src={`${props.movieImage}`}
       alt={`Image of ${props.title}`}
       style={{ maxWidth: '15rem' }}
+      onClick={() => props.history.push(`/movie/${props._id}`)}
     />
-  </Link>
+  </>
 );
+
+export default withRouter(MovieItem);
