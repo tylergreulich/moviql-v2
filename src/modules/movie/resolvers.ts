@@ -43,8 +43,6 @@ export const resolvers: ResolverMap = {
           { new: true }
         );
 
-        await movie.save();
-
         return movie;
       } catch (error) {
         console.log(error);
