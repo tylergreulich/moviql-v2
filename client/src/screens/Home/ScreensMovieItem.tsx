@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 type MovieItemProps = IMovie & RouteComponentProps<any>;
 
-const MovieItem = (props: MovieItemProps) => (
+export const MovieItem = (props: MovieItemProps) => (
   <>
     <img
       src={`${props.movieImage}`}

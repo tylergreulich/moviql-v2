@@ -1,24 +1,11 @@
 import * as React from 'react';
-// import { Simulate } from 'react-dom/test-utils';
+
 import MovieItem from '../ScreensMovieItem';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import { render, fireEvent } from 'react-testing-library';
+
+import { fireEvent } from 'react-testing-library';
+import { renderWithRouter } from '../../../utils/__test__/renderWithRouter';
 
 const title = 'Title';
-
-function renderWithRouter(
-  ui: any,
-  {
-    route = '/',
-    history = createMemoryHistory({ initialEntries: [route] })
-  } = {}
-) {
-  return {
-    ...render(<Router history={history}>{ui}</Router>),
-    history
-  };
-}
 
 describe('MoveItem Component', () => {
   it('Should redirect the user to the movie', () => {
