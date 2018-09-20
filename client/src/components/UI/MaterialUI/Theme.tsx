@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
+  palette: {
+    primary: red
+  },
   overrides: {
     MuiInput: {
       root: {
@@ -13,7 +17,7 @@ const theme = createMuiTheme({
           borderBottom: '2px solid rgba(0, 121, 107, 0.8)'
         },
         '&:hover:not($disabled):not($focused):not($error):before': {
-          borderBottom: '2px solid rgba(0, 121, 107, 0.8)'
+          borderBottom: '2px solid #407f7f'
         }
       }
     },

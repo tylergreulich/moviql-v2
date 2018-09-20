@@ -7,6 +7,7 @@ type Movie {
   description: String!
   releaseDate: String!
   movieImage: String!
+  movieBgImage: String!
   rating: Int
   ## rating will be done via math operation from movieRating via comments
   ## find average rating from movieRating divided by # of movieReviews
@@ -28,6 +29,7 @@ type Mutation {
     description: String!
     releaseDate: String
     movieImage: String!
+    movieBgImage: String!
   ): Movie!
   editMovie(
     _id: ID!

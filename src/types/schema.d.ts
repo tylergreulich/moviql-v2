@@ -59,6 +59,7 @@ export namespace GQL {
     description: string;
     releaseDate: string;
     movieImage: string;
+    movieBgImage: string;
     rating: number | null;
 
     /**
@@ -92,8 +93,8 @@ export namespace GQL {
 
   interface IMutation {
     __typename: 'Mutation';
-    addActor: IMovie | null;
-    deleteActor: IMovie | null;
+    addActor: IActor | null;
+    deleteActor: IActor | null;
     addComment: IMovie;
     loginUser: IToken | null;
     addMovie: IMovie;
@@ -129,6 +130,7 @@ export namespace GQL {
     description: string;
     releaseDate?: string | null;
     movieImage: string;
+    movieBgImage: string;
   }
 
   interface IEditMovieOnMutationArguments {

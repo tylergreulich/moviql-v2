@@ -19,12 +19,13 @@ export const resolvers: ResolverMap = {
     addMovie: async (root, args, { Movie }) => {
       await validateMovieMutation(args);
 
-      const { title, description, movieImage } = args;
+      const { title, description, movieImage, movieBgImage } = args;
 
       const newMovie = await new Movie({
         title,
         description,
-        movieImage
+        movieImage,
+        movieBgImage
       }).save();
 
       return newMovie;

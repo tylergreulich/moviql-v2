@@ -40,7 +40,6 @@ const Navigation = (props: NavigationScreenProps) => {
                 justifyContent: 'flex-end'
               }}
             >
-              <Button>Register</Button>
               <Button>Login</Button>
             </div>
           </Toolbar>
