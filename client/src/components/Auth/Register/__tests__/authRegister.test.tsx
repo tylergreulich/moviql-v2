@@ -38,7 +38,7 @@ describe('authRegister', () => {
   });
 
   it('Should render loading state initially', () => {
-    const { getByText, getByTestId } = renderWithRouter(
+    const { getByText } = renderWithRouter(
       <MockedProvider mocks={mocks} addTypename={false}>
         <AuthRegister />
       </MockedProvider>
@@ -47,17 +47,17 @@ describe('authRegister', () => {
     const submitButton = getByText('Register') as HTMLButtonElement;
     // const formNode = container.querySelector('form');
 
-    const usernameNode = getByTestId('username') as HTMLInputElement;
-    const emailNode = getByTestId('email') as HTMLInputElement;
-    const passwordNode = getByTestId('password') as HTMLInputElement;
-    const confrimPasswordNode = getByTestId(
-      'confirmPassword'
-    ) as HTMLInputElement;
+    // const usernameNode = getByTestId('username') as HTMLInputElement;
+    // const emailNode = getByTestId('email') as HTMLInputElement;
+    // const passwordNode = getByTestId('password') as HTMLInputElement;
+    // const confrimPasswordNode = getByTestId(
+    //   'confirmPassword'
+    // ) as HTMLInputElement;
 
-    usernameNode.value = 'asdf';
-    emailNode.value = 'asdf@asdf.com';
-    passwordNode.value = 'asdfasdf';
-    confrimPasswordNode.value = 'asdfasdf';
+    // usernameNode.value = 'asdf';
+    // emailNode.value = 'asdf@asdf.com';
+    // passwordNode.value = 'asdfasdf';
+    // confrimPasswordNode.value = 'asdfasdf';
 
     fireEvent(submitButton, new MouseEvent('click'));
 
