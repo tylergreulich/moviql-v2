@@ -1,11 +1,4 @@
 export const getValidationErrors = (error: any) => {
-  const {
-    graphQLErrors: [
-      {
-        extensions: { exception: errors }
-      }
-    ]
-  } = error;
-
-  return errors;
+  const { graphQLErrors: errors } = error;
+  return errors[0];
 };

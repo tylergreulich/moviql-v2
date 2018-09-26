@@ -23,12 +23,15 @@
     "@material-ui/icons": "^3.0.1",
     "apollo-boost": "^0.1.15",
     "apollo-upload-client": "^8.1.0",
+    "classnames": "^2.2.6",
     "graphql": "^14.0.2",
     "react": "^16.5.0",
     "react-apollo": "^2.1.11",
     "react-dom": "^16.5.0",
+    "react-pose": "^3.3.4",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "2.17.0",
+    "react-transition-group": "^2.5.0",
     "styled-components": "^3.4.6",
     "ts-jest": "^23.1.4",
     "typeface-roboto": "^0.0.54"
@@ -41,6 +44,7 @@
   },
   "devDependencies": {
     "@types/apollo-upload-client": "^8.1.0",
+    "@types/classnames": "^2.2.6",
     "@types/jest": "^23.3.2",
     "@types/node": "^10.9.4",
     "@types/react": "^16.4.13",

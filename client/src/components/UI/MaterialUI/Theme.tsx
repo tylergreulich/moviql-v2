@@ -14,10 +14,10 @@ const theme = createMuiTheme({
       underline: {
         '&:after': {
           // underline color when textfield is inactive
-          borderBottom: '2px solid rgba(0, 121, 107, 0.8)'
+          borderBottom: '2px solid #EE4266'
         },
         '&:hover:not($disabled):not($focused):not($error):before': {
-          borderBottom: '2px solid #407f7f'
+          borderBottom: '2px solid #EE4266'
         }
       }
     },
@@ -25,7 +25,7 @@ const theme = createMuiTheme({
       root: {
         fontSize: '1.7rem',
         '&$focused': {
-          color: 'rgba(0, 121, 107, 0.8)'
+          color: '#EE4266'
         }
       }
     },
@@ -42,9 +42,9 @@ const theme = createMuiTheme({
         width: '30rem',
         marginTop: '1.2rem',
         fontSize: '1.7rem',
-        backgroundColor: 'rgba(0, 121, 107, 0.8)',
+        backgroundColor: 'rgba(42, 30, 92, 0.9)',
         '&:hover': {
-          backgroundColor: 'rgba(0, 101, 107, 0.8)'
+          backgroundColor: 'rgba(50, 36, 109, 0.9)'
         }
       },
       containedSecondary: {

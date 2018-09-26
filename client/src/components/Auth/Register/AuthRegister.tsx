@@ -3,20 +3,21 @@ import { REGISTER_USER } from '../../../mutations/registerUser';
 import { Mutation, MutationFn } from 'react-apollo';
 import {
   RegisterState,
-  RegisterProps,
   RegisterData,
-  RegisterVariables
+  RegisterVariables,
+  RegisterProps
 } from 'src/interfaces/Auth/AuthRegister.interface';
-import { isEmpty } from '../../../utils/isEmpty';
 import { getValidationErrors } from '../../../utils/getValidationErrors';
 
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import ThemeWrapper from '../../UI/MaterialUI/Theme';
-import { TextField, Typography } from '@material-ui/core';
+import { Typography, Card } from '@material-ui/core';
 import { FormContainer } from '../../UI/Form/FormContainer';
-import { FormButton } from '../../UI/Button/Button';
-import { ComponentWrapper } from '../../UI/ComponentWrapper';
+import { FormButton, FormButtonContainer } from '../../UI/Button/Button';
+import { AuthInputs } from '../AuthInputs';
+import { Spinner } from '../../../utils/Spinner';
+import { MySnackbarContent } from '../../../utils/MySnackbarContent';
 
 class Register extends React.Component<RegisterProps, RegisterState> {
   public state: RegisterState = {
@@ -24,7 +25,8 @@ class Register extends React.Component<RegisterProps, RegisterState> {
     username: '',
     password: '',
     confirmPassword: '',
-    errors: {}
+    errors: {},
+    success: false
   };
 
   public onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +38,18 @@ class Register extends React.Component<RegisterProps, RegisterState> {
     });
   };
 
-  public onRegisterUserAndRedirect = async (registerUser: MutationFn) => {
+  public onCloseHandler = () => this.setState({ success: false });
+
+  public onRegisterUser = async (registerUser: MutationFn) => {
     await registerUser();
-    this.setState({ errors: {} });
-    this.props.history.push('/login');
+    this.setState({
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      errors: {},
+      success: true
+    });
   };
 
   public onSubmitHandler = async (
@@ -48,20 +58,22 @@ class Register extends React.Component<RegisterProps, RegisterState> {
   ) => {
     event.preventDefault();
     try {
-      await this.onRegisterUserAndRedirect(registerUser);
+      await this.onRegisterUser(registerUser);
     } catch (error) {
-      const { errors } = await getValidationErrors(error);
+      const errors = await getValidationErrors(error);
       this.setState({ errors });
     }
   };
 
-  public validateForm = () => {
-    const { email, username, password, confirmPassword } = this.state;
-    return isEmpty(email || username || password || confirmPassword);
-  };
-
   public render() {
-    const { email, username, password, confirmPassword, errors } = this.state;
+    const {
+      email,
+      username,
+      password,
+      confirmPassword,
+      errors,
+      success
+    } = this.state;
 
     return (
       <>
@@ -70,87 +82,83 @@ class Register extends React.Component<RegisterProps, RegisterState> {
           variables={{ email, username, password, confirmPassword }}
         >
           {(registerUser, { loading }) => {
+            if (loading) {
+              return (
+                <Card style={{ flex: '.275', zIndex: 4 }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '100%'
+                    }}
+                  >
+                    <Spinner />
+                  </div>
+                </Card>
+              );
+            }
+
             return (
-              <ComponentWrapper>
+              <Card style={{ flex: '.25', zIndex: 4 }}>
                 <FormContainer
                   onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
                     this.onSubmitHandler(event, registerUser)
                   }
+                  style={{ height: '100vh' }}
                 >
                   <ThemeWrapper>
-                    <Typography variant="display3">Recipe Book</Typography>
-                    <TextField
-                      error={!!errors!.username}
-                      label={errors!.username ? errors!.username : 'Username'}
-                      value={username}
-                      margin="normal"
-                      name="username"
-                      onChange={this.onChangeHandler}
-                      data-testid="username"
-                    />
-                    <TextField
-                      error={!!errors!.email}
-                      label={errors!.email ? errors!.email : 'Email'}
-                      value={email}
-                      margin="normal"
-                      name="email"
-                      onChange={this.onChangeHandler}
-                      data-testid="email"
-                    />
-                    <TextField
-                      type="password"
-                      error={!!errors!.password}
-                      label={errors!.password ? errors!.password : 'Password'}
-                      value={password}
-                      margin="normal"
-                      name="password"
-                      onChange={this.onChangeHandler}
-                      data-testid="password"
-                    />
-                    <TextField
-                      type="password"
-                      error={!!errors!.confirmPassword}
-                      label={
-                        errors!.confirmPassword
-                          ? errors!.confirmPassword
-                          : 'Confirm Password'
-                      }
-                      value={confirmPassword}
-                      margin="normal"
-                      name="confirmPassword"
-                      onChange={this.onChangeHandler}
-                      data-testid="confirmPassword"
-                    />
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'space-around',
                         flexDirection: 'column',
-                        width: '30rem'
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '70%'
                       }}
                     >
-                      <FormButton
-                        variant="contained"
-                        color="primary"
-                        wide="true"
-                        type="submit"
-                        disabled={this.validateForm()}
-                      >
-                        Register
-                      </FormButton>
-                      <Link to="/login">
-                        <FormButton
-                          variant="contained"
-                          color="primary"
-                          wide="true"
-                        >
-                          Or Login
-                        </FormButton>
-                      </Link>
+                      {success ? (
+                        <MySnackbarContent
+                          onClose={this.onCloseHandler}
+                          variant="success"
+                          message="This is a success message!"
+                        />
+                      ) : (
+                        <>
+                          <Typography
+                            variant="headline"
+                            style={{ fontSize: '2.2rem' }}
+                          >
+                            Welcome, Guest!
+                          </Typography>
+                          <Typography variant="display1">
+                            Please register or sign up
+                          </Typography>
+                          <AuthInputs
+                            email={email}
+                            username={username}
+                            password={password}
+                            confirmPassword={confirmPassword}
+                            errors={errors}
+                            onChange={this.onChangeHandler}
+                            isRegisterForm={true}
+                          />
+                          <FormButtonContainer>
+                            <FormButton
+                              variant="contained"
+                              color="primary"
+                              wide="true"
+                              type="submit"
+                            >
+                              Sign Up
+                            </FormButton>
+                          </FormButtonContainer>
+                        </>
+                      )}
                     </div>
                   </ThemeWrapper>
                 </FormContainer>
-              </ComponentWrapper>
+              </Card>
             );
           }}
         </Mutation>

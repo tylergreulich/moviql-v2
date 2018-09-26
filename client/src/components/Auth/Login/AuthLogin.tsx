@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, TextField, Typography } from '@material-ui/core';
+import { Card, Typography } from '@material-ui/core';
 import { FormContainer } from '../../UI/Form/FormContainer';
 import { FormButton } from '../../UI/Button/Button';
 import ThemeWrapper from '../../UI/MaterialUI/Theme';
@@ -13,6 +13,7 @@ import { LOGIN_USER } from '../../../mutations/loginUser';
 import { Mutation, MutationFn } from 'react-apollo';
 import { getValidationErrors } from '../../../utils/getValidationErrors';
 import { withRouter } from 'react-router';
+import { AuthInputs } from '../AuthInputs';
 
 class AuthLogin extends React.Component<LoginProps, LoginState> {
   public state: LoginState = {
@@ -44,7 +45,7 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
     try {
       await this.onLoginUserAndRedirect(loginUser);
     } catch (error) {
-      const { errors } = await getValidationErrors(error);
+      const errors = await getValidationErrors(error);
       this.setState({ errors });
     }
   };
@@ -60,7 +61,7 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
         >
           {(loginUser, { loading }) => {
             return (
-              <Card style={{ flex: '.4', zIndex: 4 }}>
+              <Card style={{ flex: '.25', zIndex: 4 }}>
                 <FormContainer
                   onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
                     this.onSubmitHandler(event, loginUser)
@@ -68,40 +69,39 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
                   style={{ height: '100vh' }}
                 >
                   <ThemeWrapper>
-                    <Typography
-                      variant="headline"
-                      style={{ fontSize: '2.2rem' }}
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '70%'
+                      }}
                     >
-                      Welcome Back
-                    </Typography>
-                    <Typography variant="display1">
-                      Sign in to your account
-                    </Typography>
-                    <TextField
-                      error={!!errors!.email}
-                      label={errors!.email ? errors!.email : 'Email'}
-                      value={email}
-                      margin="normal"
-                      name="email"
-                      onChange={this.onChangeHandler}
-                      data-testid="email"
-                    />
-                    <TextField
-                      type="password"
-                      error={!!errors!.password}
-                      label={errors!.password ? errors!.password : 'Password'}
-                      value={password}
-                      margin="normal"
-                      name="password"
-                      onChange={this.onChangeHandler}
-                      data-testid="password"
-                    />
-                    <FormButton
-                      wide={true.toString()}
-                      uppercase={true.toString()}
-                    >
-                      Login
-                    </FormButton>
+                      <Typography
+                        variant="headline"
+                        style={{ fontSize: '2.2rem' }}
+                      >
+                        Welcome Back
+                      </Typography>
+                      <Typography variant="display1">
+                        Sign in to your account
+                      </Typography>
+                      <AuthInputs
+                        email={email}
+                        password={password}
+                        errors={errors}
+                        onChange={this.onChangeHandler}
+                      />
+                      <FormButton
+                        variant="contained"
+                        color="primary"
+                        wide="true"
+                        type="submit"
+                      >
+                        Sign In
+                      </FormButton>
+                    </div>
                   </ThemeWrapper>
                 </FormContainer>
               </Card>

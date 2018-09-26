@@ -7,7 +7,14 @@ interface FormButtonProps {
 }
 
 export const FormButton = styled(Button)`
-  width: ${(props: FormButtonProps) => (props.wide ? '30rem' : null)};
+  width: ${(props: FormButtonProps) => (props.wide ? '30rem' : '15rem')};
   text-transform: ${(props: FormButtonProps) =>
     props.uppercase ? 'uppercase' : null};
+`;
+
+export const FormButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 30rem;
 `;

@@ -1,20 +1,21 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { History } from 'history';
 
-interface RegisterInputFields {
-  username: string;
+interface RegisterFieldState {
   email: string;
+  username: string;
   password: string;
   confirmPassword: string;
+  success: boolean;
 }
 
-interface RegisterInputErrors {
+interface RegisterFieldErrors {
   errors?: {
-    [key: string]: RegisterState;
+    [key: string]: RegisterFieldState;
   };
 }
 
-export type RegisterState = RegisterInputErrors & RegisterInputFields;
+export type RegisterState = RegisterFieldErrors & RegisterFieldState;
 
 export interface RegisterProps extends RouteComponentProps<any> {
   history: History;

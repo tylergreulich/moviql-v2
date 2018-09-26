@@ -7,9 +7,10 @@ import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
 const Navigation = (props: NavigationScreenProps) => {
   // const { session } = props;
+  const isHomeRoute = props.location.pathname === '/';
 
   return (
-    <div style={{ flexGrow: 1 }}>
+    <div style={{ flexGrow: 1, display: isHomeRoute ? 'none' : undefined }}>
       <ThemeProvider>
         <AppBar
           position="static"
