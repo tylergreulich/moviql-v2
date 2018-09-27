@@ -6,7 +6,6 @@ interface RegisterFieldState {
   username: string;
   password: string;
   confirmPassword: string;
-  success: boolean;
 }
 
 interface RegisterFieldErrors {
@@ -19,6 +18,9 @@ export type RegisterState = RegisterFieldErrors & RegisterFieldState;
 
 export interface RegisterProps extends RouteComponentProps<any> {
   history: History;
+  onClick: () => void;
+  onClose: () => void;
+  success: boolean;
 }
 
 export interface RegisterData {

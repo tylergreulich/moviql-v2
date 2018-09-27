@@ -31,7 +31,8 @@ const styles1 = (theme: any) => ({
   },
   message: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontSize: '1.1rem'
   }
 });
 

@@ -2,15 +2,15 @@ import * as React from 'react';
 import { waitForElement } from 'react-testing-library';
 import { MockedProvider } from 'react-apollo/test-utils';
 
-import { ScreensHomePage } from '../ScreensHomePage';
-import getMovies from '../../../queries/getMovies';
+import { HomePage } from '../ScreensHomePage';
+import { GET_MOVIES } from '../../../queries/getMovies';
 
 import { renderWithRouter } from '../../../utils/__test__/renderWithRouter';
 
 const mocks = [
   {
     request: {
-      query: getMovies
+      query: GET_MOVIES
     },
     result: {
       data: {
@@ -29,7 +29,7 @@ describe('HomePage Component', () => {
   it('Renders without error', () => {
     renderWithRouter(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <ScreensHomePage />
+        <HomePage />
       </MockedProvider>
     );
   });
@@ -37,7 +37,7 @@ describe('HomePage Component', () => {
   it('Should render loading state initially', () => {
     const { getByText } = renderWithRouter(
       <MockedProvider mocks={[]} addTypename={false}>
-        <ScreensHomePage />
+        <HomePage />
       </MockedProvider>
     );
 
@@ -50,7 +50,7 @@ describe('HomePage Component', () => {
   it('Should render MovieItem', async () => {
     const { getByAltText } = renderWithRouter(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <ScreensHomePage />
+        <HomePage />
       </MockedProvider>
     );
 

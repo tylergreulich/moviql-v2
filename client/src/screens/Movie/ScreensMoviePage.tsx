@@ -23,7 +23,7 @@ const MoviePage = (props: RouteComponentProps<any>) => {
       variables={{ _id }}
     >
       {({ loading, data, error }) => {
-        if (loading || !data) {
+        if (!data) {
           return null;
         }
 

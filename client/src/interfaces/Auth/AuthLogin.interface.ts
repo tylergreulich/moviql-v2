@@ -17,6 +17,7 @@ export type LoginState = LoginInputErrors & LoginInputFields;
 export interface LoginProps extends RouteComponentProps<any> {
   history: History;
   style?: object;
+  onClick: () => void;
 }
 
 export interface LoginData {

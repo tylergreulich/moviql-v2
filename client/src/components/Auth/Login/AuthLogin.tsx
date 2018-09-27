@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Card, Typography } from '@material-ui/core';
 import { FormContainer } from '../../UI/Form/FormContainer';
 import { FormButton } from '../../UI/Button/Button';
-import ThemeWrapper from '../../UI/MaterialUI/Theme';
+import { ThemeWrapper } from '../../UI/MaterialUI/Theme';
 import {
   LoginProps,
   LoginState,
@@ -100,6 +100,14 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
                         type="submit"
                       >
                         Sign In
+                      </FormButton>
+                      <FormButton
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        onClick={this.props.onClick}
+                      >
+                        Or Register
                       </FormButton>
                     </div>
                   </ThemeWrapper>

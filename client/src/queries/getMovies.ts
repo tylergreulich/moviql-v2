@@ -1,10 +1,11 @@
 import { gql } from 'apollo-boost';
 
-export default gql`
-  query GetMovies {
+export const GET_MOVIES = gql`
+  query getMovies {
     getMovies {
       _id
       movieImage
+      title
     }
   }
 `;

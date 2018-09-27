@@ -8,8 +8,9 @@ import { ApolloProvider } from 'react-apollo';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import { ScreensHomePage } from 'src/screens/Home/ScreensHomePage';
+import { HomePage } from 'src/screens/Home/ScreensHomePage';
 import MoviePage from 'src/screens/Movie/ScreensMoviePage';
+import { BrowsePage } from 'src/screens/Movie/ScreensBrowsePage';
 import Navigation from 'src/screens/Navigation/ScreensNavigation';
 
 // import { withSession } from 'src/utils/withSession';
@@ -37,10 +38,11 @@ const client = new ApolloClient({
 const Root = () => (
   <BrowserRouter>
     <>
-      <Route exact={true} path="/" component={ScreensHomePage} />
+      <Route exact={true} path="/" component={HomePage} />
       <Navigation />
       <Switch>
-        <Route exact={true} path="/movie/:id" component={MoviePage} />
+        <Route exact={true} path="/browse" component={BrowsePage} />
+        <Route exact={true} path="/browse/movie/:id" component={MoviePage} />
         <Redirect to="/" />
       </Switch>
     </>

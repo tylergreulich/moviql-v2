@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationScreenProps } from 'src/interfaces/NavigationScreen/NavigationScreen.interface';
 import { withRouter } from 'react-router-dom';
-import ThemeProvider from 'src/components/UI/MaterialUI/Theme';
+import { ThemeWrapper } from 'src/components/UI/MaterialUI/Theme';
 
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
@@ -11,7 +11,7 @@ const Navigation = (props: NavigationScreenProps) => {
 
   return (
     <div style={{ flexGrow: 1, display: isHomeRoute ? 'none' : undefined }}>
-      <ThemeProvider>
+      <ThemeWrapper>
         <AppBar
           position="static"
           style={{ backgroundColor: 'rgba(0, 121, 107, 0.8)' }}
@@ -45,7 +45,7 @@ const Navigation = (props: NavigationScreenProps) => {
             </div>
           </Toolbar>
         </AppBar>
-      </ThemeProvider>
+      </ThemeWrapper>
     </div>
   );
 };

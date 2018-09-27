@@ -11,7 +11,7 @@ import { getValidationErrors } from '../../../utils/getValidationErrors';
 
 import { withRouter } from 'react-router-dom';
 
-import ThemeWrapper from '../../UI/MaterialUI/Theme';
+import { ThemeWrapper } from '../../UI/MaterialUI/Theme';
 import { Typography, Card } from '@material-ui/core';
 import { FormContainer } from '../../UI/Form/FormContainer';
 import { FormButton, FormButtonContainer } from '../../UI/Button/Button';
@@ -25,8 +25,7 @@ class Register extends React.Component<RegisterProps, RegisterState> {
     username: '',
     password: '',
     confirmPassword: '',
-    errors: {},
-    success: false
+    errors: {}
   };
 
   public onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +37,6 @@ class Register extends React.Component<RegisterProps, RegisterState> {
     });
   };
 
-  public onCloseHandler = () => this.setState({ success: false });
-
   public onRegisterUser = async (registerUser: MutationFn) => {
     await registerUser();
     this.setState({
@@ -47,8 +44,7 @@ class Register extends React.Component<RegisterProps, RegisterState> {
       email: '',
       password: '',
       confirmPassword: '',
-      errors: {},
-      success: true
+      errors: {}
     });
   };
 
@@ -66,14 +62,9 @@ class Register extends React.Component<RegisterProps, RegisterState> {
   };
 
   public render() {
-    const {
-      email,
-      username,
-      password,
-      confirmPassword,
-      errors,
-      success
-    } = this.state;
+    const { email, username, password, confirmPassword, errors } = this.state;
+
+    const { success } = this.props;
 
     return (
       <>
@@ -81,24 +72,7 @@ class Register extends React.Component<RegisterProps, RegisterState> {
           mutation={REGISTER_USER}
           variables={{ email, username, password, confirmPassword }}
         >
-          {(registerUser, { loading }) => {
-            if (loading) {
-              return (
-                <Card style={{ flex: '.275', zIndex: 4 }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      height: '100%'
-                    }}
-                  >
-                    <Spinner />
-                  </div>
-                </Card>
-              );
-            }
-
+          {(registerUser, { loading, data }) => {
             return (
               <Card style={{ flex: '.25', zIndex: 4 }}>
                 <FormContainer
@@ -117,32 +91,34 @@ class Register extends React.Component<RegisterProps, RegisterState> {
                         height: '70%'
                       }}
                     >
-                      {success ? (
-                        <MySnackbarContent
-                          onClose={this.onCloseHandler}
-                          variant="success"
-                          message="This is a success message!"
+                      <>
+                        <Typography
+                          variant="headline"
+                          style={{ fontSize: '2.2rem' }}
+                        >
+                          Welcome, Guest!
+                        </Typography>
+                        <Typography variant="display1">
+                          Please register or sign in
+                        </Typography>
+                        <AuthInputs
+                          email={email}
+                          username={username}
+                          password={password}
+                          confirmPassword={confirmPassword}
+                          errors={errors}
+                          onChange={this.onChangeHandler}
+                          isRegisterForm={true}
                         />
-                      ) : (
-                        <>
-                          <Typography
-                            variant="headline"
-                            style={{ fontSize: '2.2rem' }}
-                          >
-                            Welcome, Guest!
-                          </Typography>
-                          <Typography variant="display1">
-                            Please register or sign up
-                          </Typography>
-                          <AuthInputs
-                            email={email}
-                            username={username}
-                            password={password}
-                            confirmPassword={confirmPassword}
-                            errors={errors}
-                            onChange={this.onChangeHandler}
-                            isRegisterForm={true}
+                        {loading ? (
+                          <Spinner />
+                        ) : data && success ? (
+                          <MySnackbarContent
+                            onClose={this.props.onClose}
+                            variant="success"
+                            message="Successfully Registered!"
                           />
+                        ) : (
                           <FormButtonContainer>
                             <FormButton
                               variant="contained"
@@ -150,11 +126,19 @@ class Register extends React.Component<RegisterProps, RegisterState> {
                               wide="true"
                               type="submit"
                             >
-                              Sign Up
+                              Register
+                            </FormButton>
+                            <FormButton
+                              variant="contained"
+                              color="primary"
+                              type="submit"
+                              onClick={this.props.onClick}
+                            >
+                              Or Sign In
                             </FormButton>
                           </FormButtonContainer>
-                        </>
-                      )}
+                        )}
+                      </>
                     </div>
                   </ThemeWrapper>
                 </FormContainer>

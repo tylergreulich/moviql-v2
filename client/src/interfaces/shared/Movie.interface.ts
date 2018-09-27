@@ -12,4 +12,5 @@ export interface IMovie {
   likes?: number;
   comments?: [IComment];
   onClick?: () => void;
+  loading: boolean;
 }

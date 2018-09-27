@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextField } from '@material-ui/core';
+import { FormInput } from '../UI/HomePage/FormInputs';
 
 interface AuthInputFieldProps {
   email: string;
@@ -37,7 +37,7 @@ export const AuthInputs = (props: AuthInputProps) => {
   return (
     <>
       {isRegisterForm ? (
-        <TextField
+        <FormInput
           error={!!errors!.username}
           label={errors!.username ? errors!.username : 'Username'}
           value={username}
@@ -48,7 +48,7 @@ export const AuthInputs = (props: AuthInputProps) => {
         />
       ) : null}
 
-      <TextField
+      <FormInput
         error={!!errors!.email}
         label={errors!.email ? errors!.email : 'Email'}
         value={email}
@@ -57,7 +57,7 @@ export const AuthInputs = (props: AuthInputProps) => {
         onChange={onChange}
         data-testid="email"
       />
-      <TextField
+      <FormInput
         type="password"
         error={!!errors!.password}
         label={errors!.password ? errors!.password : 'Password'}
@@ -68,7 +68,7 @@ export const AuthInputs = (props: AuthInputProps) => {
         data-testid="password"
       />
       {isRegisterForm ? (
-        <TextField
+        <FormInput
           type="password"
           error={!!errors!.confirmPassword}
           label={
