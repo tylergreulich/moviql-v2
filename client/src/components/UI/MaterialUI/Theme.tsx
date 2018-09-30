@@ -3,10 +3,10 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 
 const primaryColor = 'rgba(79, 57, 173, 0.9)';
-const primaryColorHover = '#543DB8';
+const primaryColorDark = '#543DB8';
 
 const secondaryColor = '#48B75C';
-const secondaryColorHover = '#41a553';
+const secondaryColorDark = '#41a553';
 
 const theme = createMuiTheme({
   palette: {
@@ -50,7 +50,7 @@ const theme = createMuiTheme({
         fontSize: '1.4rem',
         backgroundColor: `${primaryColor}`,
         '&:hover': {
-          backgroundColor: `${primaryColorHover}`
+          backgroundColor: `${primaryColorDark}`
         }
       },
       containedSecondary: {
@@ -59,7 +59,7 @@ const theme = createMuiTheme({
         fontSize: '1.4rem',
         backgroundColor: `${secondaryColor}`,
         '&:hover': {
-          backgroundColor: `${secondaryColorHover}`
+          backgroundColor: `${secondaryColorDark}`
         }
       }
     },
