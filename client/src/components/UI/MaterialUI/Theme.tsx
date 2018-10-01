@@ -2,17 +2,22 @@ import * as React from 'react';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 
-const primaryColor = 'rgba(79, 57, 173, 0.9)';
-const primaryColorDark = '#543DB8';
+const primaryColor = '#00D280';
+const primaryColorDark = '#00B871';
 
-const secondaryColor = '#48B75C';
-const secondaryColorDark = '#41a553';
+const secondaryColor = '#4357BC';
+const secondaryColorDark = '#4154B4';
 
 const theme = createMuiTheme({
   palette: {
     primary: red
   },
   overrides: {
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: `${primaryColor}`
+      }
+    },
     MuiInput: {
       root: {
         fontSize: '2rem'
@@ -37,7 +42,7 @@ const theme = createMuiTheme({
     },
     MuiFormControl: {
       root: {
-        width: '30rem'
+        maxWidth: '35rem'
       }
     },
     MuiButton: {
@@ -45,8 +50,8 @@ const theme = createMuiTheme({
         fontSize: '1.3rem'
       },
       containedPrimary: {
-        width: '30rem',
-        marginTop: '1.2rem',
+        width: '100%',
+        margin: '1.2rem 0',
         fontSize: '1.4rem',
         backgroundColor: `${primaryColor}`,
         '&:hover': {
@@ -54,8 +59,8 @@ const theme = createMuiTheme({
         }
       },
       containedSecondary: {
-        width: '30rem',
-        marginTop: '1.2rem',
+        width: '100%',
+        margin: '1.2rem 0',
         fontSize: '1.4rem',
         backgroundColor: `${secondaryColor}`,
         '&:hover': {

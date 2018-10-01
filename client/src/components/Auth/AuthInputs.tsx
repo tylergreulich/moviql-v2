@@ -6,7 +6,6 @@ interface AuthInputFieldProps {
   username?: string;
   password: string;
   confirmPassword?: string;
-  isRegisterForm?: boolean;
 }
 
 interface AuthInputErrorProps {
@@ -15,74 +14,92 @@ interface AuthInputErrorProps {
   };
 }
 
-interface AuthInputEventProps {
+interface AuthInputUIProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isRegisterForm?: boolean;
+  showPassword?: boolean;
+  onClick?: () => void;
+  endAdornment?: any;
 }
 
 type AuthInputProps = AuthInputFieldProps &
   AuthInputErrorProps &
-  AuthInputEventProps;
+  AuthInputUIProps;
 
 export const AuthInputs = (props: AuthInputProps) => {
-  const {
-    email,
-    username,
-    password,
-    confirmPassword,
-    errors,
-    onChange,
-    isRegisterForm
-  } = props;
+  const { email, username, password, errors, onChange, isRegisterForm } = props;
 
-  return (
-    <>
-      {isRegisterForm ? (
+  let registerInputs;
+  let loginInputs;
+
+  if (isRegisterForm) {
+    registerInputs = (
+      <>
         <FormInput
-          error={!!errors!.username}
-          label={errors!.username ? errors!.username : 'Username'}
-          value={username}
+          error={!!errors!.email}
+          label={errors!.email ? errors!.email : 'Email'}
+          value={email}
           margin="normal"
-          name="username"
+          name="email"
           onChange={onChange}
-          data-testid="username"
+          data-testid="email"
         />
-      ) : null}
-
-      <FormInput
-        error={!!errors!.email}
-        label={errors!.email ? errors!.email : 'Email'}
-        value={email}
-        margin="normal"
-        name="email"
-        onChange={onChange}
-        data-testid="email"
-      />
-      <FormInput
-        type="password"
-        error={!!errors!.password}
-        label={errors!.password ? errors!.password : 'Password'}
-        value={password}
-        margin="normal"
-        name="password"
-        onChange={onChange}
-        data-testid="password"
-      />
-      {isRegisterForm ? (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%'
+          }}
+        >
+          <FormInput
+            error={!!errors!.username}
+            label={errors!.username ? errors!.username : 'Username'}
+            value={username}
+            margin="normal"
+            name="username"
+            onChange={onChange}
+            data-testid="username"
+            style={{ flex: '.45' }}
+          />
+          <FormInput
+            type={props.showPassword ? 'text' : 'password'}
+            error={!!errors!.password}
+            label={errors!.password ? errors!.password : 'Password'}
+            value={password}
+            margin="normal"
+            name="password"
+            onChange={onChange}
+            data-testid="password"
+            style={{ flex: '.45' }}
+          />
+        </div>
+      </>
+    );
+  } else {
+    loginInputs = (
+      <>
+        <FormInput
+          error={!!errors!.email}
+          label={errors!.email ? errors!.email : 'Email'}
+          value={email}
+          margin="normal"
+          name="email"
+          onChange={onChange}
+          data-testid="email"
+        />
         <FormInput
           type="password"
-          error={!!errors!.confirmPassword}
-          label={
-            errors!.confirmPassword
-              ? errors!.confirmPassword
-              : 'Confirm Password'
-          }
-          value={confirmPassword}
+          error={!!errors!.password}
+          label={errors!.password ? errors!.password : 'Password'}
+          value={password}
           margin="normal"
-          name="confirmPassword"
+          name="password"
           onChange={onChange}
-          data-testid="confirmPassword"
+          data-testid="password"
         />
-      ) : null}
-    </>
-  );
+      </>
+    );
+  }
+
+  return <>{registerInputs || loginInputs}</>;
 };

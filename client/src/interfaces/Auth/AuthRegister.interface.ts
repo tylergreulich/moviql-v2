@@ -1,20 +1,26 @@
 import { RouteComponentProps } from 'react-router-dom';
 import { History } from 'history';
 
-interface RegisterFieldState {
+interface RegisterFieldInputs {
   email: string;
   username: string;
   password: string;
-  confirmPassword: string;
 }
 
 interface RegisterFieldErrors {
   errors?: {
-    [key: string]: RegisterFieldState;
+    [key: string]: RegisterFieldInputs;
   };
 }
 
-export type RegisterState = RegisterFieldErrors & RegisterFieldState;
+interface RegisterStateUI {
+  testSpinner: boolean;
+  success: boolean;
+}
+
+export type RegisterState = RegisterFieldErrors &
+  RegisterFieldInputs &
+  RegisterStateUI;
 
 export interface RegisterProps extends RouteComponentProps<any> {
   history: History;
@@ -31,5 +37,4 @@ export interface RegisterVariables {
   username: string;
   email: string;
   password: string;
-  confirmPassword: string;
 }

@@ -9,7 +9,6 @@ type Mutation {
     username: String!
     email: String!
     password: String!
-    confirmPassword: String!
     isAdmin: Boolean
   ): Token
 }

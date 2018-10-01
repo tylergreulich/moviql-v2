@@ -12,6 +12,10 @@ import { HomePage } from 'src/screens/Home/ScreensHomePage';
 import MoviePage from 'src/screens/Movie/ScreensMoviePage';
 import { BrowsePage } from 'src/screens/Movie/ScreensBrowsePage';
 import Navigation from 'src/screens/Navigation/ScreensNavigation';
+
+import Register from 'src/components/Auth/Register/AuthRegister';
+import Login from 'src/components/Auth/Login/AuthLogin';
+
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 // import { withSession } from 'src/utils/withSession';
@@ -51,24 +55,23 @@ const Root = () => (
             <Navigation />
             <TransitionGroup>
               <CSSTransition
-                timeout={
-                  location.pathname === '/'
-                    ? 250
-                    : location.pathname === '/browse'
-                      ? 1000
-                      : 0
-                }
+                timeout={6000}
                 classNames={
                   location.pathname === '/'
-                    ? 'slide'
-                    : location.pathname === '/browse'
-                      ? 'browse'
-                      : 'slide'
+                    ? 'home'
+                    : location.pathname === '/signup'
+                      ? 'signup'
+                      : location.pathname === 'signin'
+                        ? 'signin'
+                        : 'default'
                 }
                 key={location.key}
+                unmountOnExit={true}
               >
                 <Switch location={location}>
                   <Route exact={true} path="/" component={HomePage} />
+                  <Route exact={true} path="/signup" component={Register} />
+                  <Route exact={true} path="/signin" component={Login} />
                   <Route exact={true} path="/browse" component={BrowsePage} />
                   <Route
                     exact={true}

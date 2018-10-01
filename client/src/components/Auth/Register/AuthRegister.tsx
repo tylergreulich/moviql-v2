@@ -13,19 +13,22 @@ import { withRouter } from 'react-router-dom';
 
 import { ThemeWrapper } from '../../UI/MaterialUI/Theme';
 import { Typography, Card } from '@material-ui/core';
-import { FormContainer } from '../../UI/Form/FormContainer';
+import {
+  FormContainer,
+  FormButtonSeperator
+} from '../../UI/Form/FormContainer';
 import { FormButton, FormButtonContainer } from '../../UI/Button/Button';
 import { AuthInputs } from '../AuthInputs';
 import { Spinner } from '../../../utils/Spinner';
-import { MySnackbarContent } from '../../../utils/MySnackbarContent';
 
 class Register extends React.Component<RegisterProps, RegisterState> {
   public state: RegisterState = {
     email: '',
     username: '',
     password: '',
-    confirmPassword: '',
-    errors: {}
+    errors: {},
+    testSpinner: false,
+    success: false
   };
 
   public onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +46,6 @@ class Register extends React.Component<RegisterProps, RegisterState> {
       username: '',
       email: '',
       password: '',
-      confirmPassword: '',
       errors: {}
     });
   };
@@ -61,25 +63,78 @@ class Register extends React.Component<RegisterProps, RegisterState> {
     }
   };
 
-  public render() {
-    const { email, username, password, confirmPassword, errors } = this.state;
+  public testSpinnerHandler = () => {
+    this.setState({ testSpinner: true });
+    setTimeout(() => {
+      this.setState({ testSpinner: false, success: true });
+    }, 2500);
+    setTimeout(() => {
+      this.setState({ testSpinner: false, success: false });
+    }, 3500);
+  };
 
-    const { success } = this.props;
+  public render() {
+    const { email, username, password, errors } = this.state;
+    const { history } = this.props;
+
+    // let test: JSX.Element;
+
+    // if (this.state.testSpinner) {
+    //   test = (
+    //     <FormButton
+    //       variant="contained"
+    //       color="secondary"
+    //       style={{ transform: 'translate(5rem, -50rem)' }}
+    //       onClick={this.testSpinnerHandler}
+    //     >
+    //       <Spinner />
+    //     </FormButton>
+    //   );
+    // } else if (this.state.success) {
+    //   test = (
+    //     <FormButton
+    //       variant="contained"
+    //       color="secondary"
+    //       style={{ transform: 'translate(5rem, -50rem)' }}
+    //       onClick={this.testSpinnerHandler}
+    //     >
+    //       Account Created!
+    //     </FormButton>
+    //   );
+    // } else {
+    //   test = (
+    //     <FormButton
+    //       variant="contained"
+    //       color="secondary"
+    //       style={{ transform: 'translate(5rem, -50rem)' }}
+    //       onClick={this.testSpinnerHandler}
+    //     >
+    //       Test
+    //     </FormButton>
+    //   );
+    // }
 
     return (
       <>
         <Mutation<RegisterData, RegisterVariables>
           mutation={REGISTER_USER}
-          variables={{ email, username, password, confirmPassword }}
+          variables={{ email, username, password }}
         >
           {(registerUser, { loading, data }) => {
             return (
-              <Card style={{ flex: '.25', zIndex: 4 }}>
+              <Card
+                style={{
+                  maxWidth: '33vw',
+                  height: '80vh',
+                  margin: '4rem auto',
+                  zIndex: -1
+                }}
+              >
                 <FormContainer
                   onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
                     this.onSubmitHandler(event, registerUser)
                   }
-                  style={{ height: '100vh' }}
+                  style={{ margin: '0 auto' }}
                 >
                   <ThemeWrapper>
                     <div
@@ -88,60 +143,57 @@ class Register extends React.Component<RegisterProps, RegisterState> {
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        height: '70%'
+                        height: '70%',
+                        maxWidth: '35rem'
                       }}
                     >
                       <>
                         <Typography
-                          variant="headline"
-                          style={{ fontSize: '2.2rem' }}
+                          variant="title"
+                          style={{ fontSize: '3rem' }}
                         >
-                          Welcome, Guest!
-                        </Typography>
-                        <Typography variant="display1">
-                          Please register or sign in
+                          Sign Up
                         </Typography>
                         <AuthInputs
                           email={email}
                           username={username}
                           password={password}
-                          confirmPassword={confirmPassword}
                           errors={errors}
                           onChange={this.onChangeHandler}
                           isRegisterForm={true}
                         />
-                        {loading ? (
-                          <Spinner />
-                        ) : data && success ? (
-                          <MySnackbarContent
-                            onClose={this.props.onClose}
-                            variant="success"
-                            message="Successfully Registered!"
-                          />
-                        ) : (
-                          <FormButtonContainer>
-                            <FormButton
-                              variant="contained"
-                              color="primary"
-                              wide="true"
-                              type="submit"
-                            >
-                              Register
-                            </FormButton>
-                            <FormButton
-                              variant="contained"
-                              color="primary"
-                              type="submit"
-                              onClick={this.props.onClick}
-                            >
-                              Or Sign In
-                            </FormButton>
-                          </FormButtonContainer>
-                        )}
+                        <FormButtonContainer>
+                          <FormButton
+                            variant="contained"
+                            color="primary"
+                            wide="true"
+                            // type="submit"
+                            style={{ letterSpacing: '.2rem' }}
+                          >
+                            {loading ? (
+                              <Spinner />
+                            ) : data ? (
+                              'Account Created!'
+                            ) : (
+                              'Create Account'
+                            )}
+                          </FormButton>
+                          <FormButtonSeperator>or</FormButtonSeperator>
+                          <FormButton
+                            variant="contained"
+                            color="secondary"
+                            // type="submit"
+                            style={{ letterSpacing: '.2rem' }}
+                            onClick={() => history.push('/signin')}
+                          >
+                            Sign In
+                          </FormButton>
+                        </FormButtonContainer>
                       </>
                     </div>
                   </ThemeWrapper>
                 </FormContainer>
+                {/* {test} */}
               </Card>
             );
           }}

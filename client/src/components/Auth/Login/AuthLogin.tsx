@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Card, Typography } from '@material-ui/core';
-import { FormContainer } from '../../UI/Form/FormContainer';
+import {
+  FormContainer,
+  FormButtonSeperator
+} from '../../UI/Form/FormContainer';
 import { FormButton } from '../../UI/Button/Button';
 import { ThemeWrapper } from '../../UI/MaterialUI/Theme';
 import {
@@ -52,6 +55,7 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
 
   public render() {
     const { email, password, errors } = this.state;
+    const { history } = this.props;
 
     return (
       <>
@@ -61,12 +65,18 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
         >
           {(loginUser, { loading }) => {
             return (
-              <Card style={{ flex: '.25', zIndex: 4 }}>
+              <Card
+                style={{
+                  maxWidth: '33vw',
+                  height: '80vh',
+                  margin: '4rem auto'
+                }}
+              >
                 <FormContainer
                   onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
                     this.onSubmitHandler(event, loginUser)
                   }
-                  style={{ height: '100vh' }}
+                  style={{ margin: '0 auto' }}
                 >
                   <ThemeWrapper>
                     <div
@@ -75,17 +85,15 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        height: '70%'
+                        height: '70%',
+                        width: '35rem'
                       }}
                     >
                       <Typography
                         variant="headline"
                         style={{ fontSize: '2.2rem' }}
                       >
-                        Welcome Back
-                      </Typography>
-                      <Typography variant="display1">
-                        Sign in to your account
+                        Sign In
                       </Typography>
                       <AuthInputs
                         email={email}
@@ -101,13 +109,14 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
                       >
                         Sign In
                       </FormButton>
+                      <FormButtonSeperator>Or</FormButtonSeperator>
                       <FormButton
                         variant="contained"
-                        color="primary"
-                        type="submit"
-                        onClick={this.props.onClick}
+                        color="secondary"
+                        // type="submit"
+                        onClick={() => history.push('/signup')}
                       >
-                        Or Register
+                        Create Account
                       </FormButton>
                     </div>
                   </ThemeWrapper>

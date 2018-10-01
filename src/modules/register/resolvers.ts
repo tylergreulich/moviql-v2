@@ -19,7 +19,7 @@ export const resolvers: ResolverMap = {
         throw new UserInputError('Validation Error', errors);
       }
 
-      const { username, email, password, confirmPassword } = args;
+      const { username, email, password } = args;
 
       const userFound = await User.findOne({ email });
 

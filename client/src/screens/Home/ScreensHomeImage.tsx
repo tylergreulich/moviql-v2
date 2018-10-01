@@ -6,7 +6,7 @@ import { ThemeWrapper } from '../../components/UI/MaterialUI/Theme';
 import { Link } from 'react-router-dom';
 
 export const HomePageImage = () => (
-  <div style={{ flex: 0.8 }}>
+  <div style={{ flex: 1 }}>
     <MovieImage>
       <div style={{ marginLeft: '3rem' }}>
         <ThemeWrapper>

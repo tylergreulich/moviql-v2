@@ -7,16 +7,12 @@ import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
 const Navigation = (props: NavigationScreenProps) => {
   // const { session } = props;
-  const isHomeRoute = props.location.pathname === '/';
 
   return (
-    <div style={{ flexGrow: 1, display: isHomeRoute ? 'none' : undefined }}>
+    <div style={{ flexGrow: 1, zIndex: 1, position: 'relative' }}>
       <ThemeWrapper>
-        <AppBar
-          position="static"
-          style={{ backgroundColor: 'rgba(0, 121, 107, 0.8)' }}
-        >
-          <Toolbar style={{ width: '900px', margin: '0 auto' }}>
+        <AppBar position="static">
+          <Toolbar style={{ width: '80%', margin: '0 auto' }}>
             <div
               style={{
                 display: 'flex',
