@@ -6,7 +6,7 @@ import { ThemeWrapper } from 'src/components/UI/MaterialUI/Theme';
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
 const Navigation = (props: NavigationScreenProps) => {
-  // const { session } = props;
+  const { history } = props;
 
   return (
     <div style={{ flexGrow: 1, zIndex: 1, position: 'relative' }}>
@@ -37,7 +37,8 @@ const Navigation = (props: NavigationScreenProps) => {
                 justifyContent: 'flex-end'
               }}
             >
-              <Button>Login</Button>
+              <Button onClick={() => history.push('/signin')}>Sign In</Button>
+              <Button onClick={() => history.push('/signup')}>Sign Up</Button>
             </div>
           </Toolbar>
         </AppBar>
