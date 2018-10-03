@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export const HomePageImage = () => (
   <div style={{ flex: 1 }}>
     <MovieImage>
-      <div style={{ marginLeft: '3rem' }}>
+      <div style={{ marginLeft: '3rem', width: '40%' }}>
         <ThemeWrapper>
           <Typography
             variant="display3"
@@ -36,7 +36,12 @@ export const HomePageImage = () => (
             Magnam explicabo harum error deserunt. Eaque, vel velit?
           </Typography>
           <Link to="/browse" style={{ textDecoration: 'none' }}>
-            <FormButton variant="contained" color="secondary" type="submit">
+            <FormButton
+              variant="contained"
+              color="secondary"
+              type="submit"
+              style={{ width: '22.5rem' }}
+            >
               Explore
             </FormButton>
           </Link>

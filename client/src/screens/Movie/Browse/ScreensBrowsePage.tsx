@@ -1,14 +1,11 @@
 import * as React from 'react';
 
-import { Card } from '@material-ui/core';
+import { ThemeWrapper } from 'src/components/UI/MaterialUI/Theme';
 
-import { ComponentWrapper } from 'src/components/UI/ComponentWrapper';
-import {
-  MovieCardImg,
-  BrowsePageContainer
-} from 'src/components/UI/BrowsePage/BrowsePage';
+import { BrowsePageContainer } from 'src/components/UI/BrowsePage/BrowsePage';
 
-import { Link } from 'react-router-dom';
+import { NewReleases } from './ScreensBrowseNewReleases';
+import { UpcomingTitles } from './ScreensBrowseUpcomingTitles';
 
 // import { Query } from 'react-apollo';
 // import { GET_MOVIES } from '../../queries/getMovies';
@@ -39,19 +36,11 @@ export const BrowsePage = () => {
     // }}
     // </Query>
 
-    <ComponentWrapper style={{ height: '100vh', width: '80%' }}>
-      <BrowsePageContainer>
-        <Card>
-          <Link
-            to={{
-              pathname: '/browse/movie/123',
-              state: { imgUrl: '../../assets/img/stonehenge.jpg', id: '123' }
-            }}
-          >
-            <MovieCardImg />
-          </Link>
-        </Card>
-      </BrowsePageContainer>
-    </ComponentWrapper>
+    <BrowsePageContainer>
+      <ThemeWrapper>
+        <NewReleases />
+        <UpcomingTitles />
+      </ThemeWrapper>
+    </BrowsePageContainer>
   );
 };

@@ -106,6 +106,7 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
                         color="primary"
                         wide="true"
                         type="submit"
+                        style={{ letterSpacing: '.2rem' }}
                       >
                         Sign In
                       </FormButton>
@@ -115,6 +116,7 @@ class AuthLogin extends React.Component<LoginProps, LoginState> {
                         color="secondary"
                         // type="submit"
                         onClick={() => history.push('/signup')}
+                        style={{ letterSpacing: '.2rem' }}
                       >
                         Create Account
                       </FormButton>

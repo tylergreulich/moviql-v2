@@ -6,13 +6,16 @@ import { ThemeWrapper } from 'src/components/UI/MaterialUI/Theme';
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
 const Navigation = (props: NavigationScreenProps) => {
-  const { history } = props;
+  const { history, location } = props;
 
   return (
     <div style={{ flexGrow: 1, zIndex: 1, position: 'relative' }}>
       <ThemeWrapper>
         <AppBar position="static">
-          <Toolbar style={{ width: '80%', margin: '0 auto' }}>
+          <Toolbar
+            style={{ width: '80%', margin: '0 auto' }}
+            onClick={() => console.log(props)}
+          >
             <div
               style={{
                 display: 'flex',
@@ -25,9 +28,13 @@ const Navigation = (props: NavigationScreenProps) => {
                 variant="title"
                 color="inherit"
                 style={{ fontSize: '1.3rem !important', cursor: 'pointer' }}
-                onClick={() => props.history.push('/')}
+                onClick={() =>
+                  location.pathname === '/browse/movie/123'
+                    ? history.push('/browse')
+                    : history.push('/')
+                }
               >
-                Home
+                {location.pathname === '/browse/movie/123' ? 'Back' : 'Home'}
               </Typography>
             </div>
             <div
@@ -37,8 +44,12 @@ const Navigation = (props: NavigationScreenProps) => {
                 justifyContent: 'flex-end'
               }}
             >
-              <Button onClick={() => history.push('/signin')}>Sign In</Button>
-              <Button onClick={() => history.push('/signup')}>Sign Up</Button>
+              <Button onClick={() => history.push('/signin')} color="inherit">
+                Sign In
+              </Button>
+              <Button onClick={() => history.push('/signup')} color="inherit">
+                Sign Up
+              </Button>
             </div>
           </Toolbar>
         </AppBar>
