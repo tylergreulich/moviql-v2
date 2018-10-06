@@ -8,9 +8,6 @@ export const validateRegister = (data: User) => {
   data.username = !isEmpty(data.username) ? data.username : '';
   data.email = !isEmpty(data.email) ? data.email : '';
   data.password = !isEmpty(data.password) ? data.password : '';
-  data.confirmPassword = !isEmpty(data.confirmPassword)
-    ? data.confirmPassword
-    : '';
 
   if (!Validator.isLength(data.username, { min: 2, max: 30 })) {
     errors.username = 'Username must be between 2 and 30 characters';
