@@ -5,7 +5,7 @@ import { isEmpty } from './is-empty';
 export const validateLogin = (authFields: User) => {
   let errors: AuthErrors = {};
 
-  const { email, passowrd } = authFields;
+  let { email, password } = authFields;
 
   email = !isEmpty(email) ? email : '';
   password = !isEmpty(password) ? password : '';

@@ -6,7 +6,7 @@ import { UserInputError } from 'apollo-server-express';
 export const validateMovie = (movieFields: Movie) => {
   let errors: MovieErrors = {};
 
-  const { title, description, movieImage } = movieFields;
+  let { title, description, movieImage } = movieFields;
 
   title = !isEmpty(title) ? title : '';
   description = !isEmpty(description) ? description : '';

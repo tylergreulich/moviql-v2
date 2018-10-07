@@ -5,7 +5,7 @@ import { isEmpty } from './is-empty';
 export const validateRegister = (authFields: User) => {
   let errors: AuthErrors = {};
 
-  const { username, email, password } = authFields;
+  let { username, email, password } = authFields;
 
   username = !isEmpty(username) ? username : '';
   email = !isEmpty(email) ? email : '';

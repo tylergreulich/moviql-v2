@@ -5,7 +5,7 @@ import { isEmpty } from './is-empty';
 export const validateComment = (commentFields: Comment) => {
   let errors: CommentErrors = {};
 
-  const { movieReview, movieRating } = commentFields;
+  let { movieReview, movieRating } = commentFields;
 
   movieReview = !isEmpty(movieReview) ? movieReview : '';
   movieRating = !isEmpty(movieRating) ? movieRating : '';
