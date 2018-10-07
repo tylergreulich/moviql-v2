@@ -3,30 +3,32 @@ import { Movie, MovieErrors } from '../interfaces/movie.interface';
 import { isEmpty } from './is-empty';
 import { UserInputError } from 'apollo-server-express';
 
-export const validateMovie = (data: Movie) => {
+export const validateMovie = (movieFields: Movie) => {
   let errors: MovieErrors = {};
 
-  data.title = !isEmpty(data.title) ? data.title : '';
-  data.description = !isEmpty(data.description) ? data.description : '';
-  data.movieImage = !isEmpty(data.movieImage) ? data.movieImage : '';
+  const { title, description, movieImage } = movieFields;
 
-  if (!Validator.isLength(data.title, { min: 2, max: 30 })) {
+  title = !isEmpty(title) ? title : '';
+  description = !isEmpty(description) ? description : '';
+  movieImage = !isEmpty(movieImage) ? movieImage : '';
+
+  if (!Validator.isLength(title, { min: 2, max: 30 })) {
     errors.title = 'Title must be between 2 and 30 characters';
   }
 
-  if (Validator.isEmpty(data.title)) {
+  if (Validator.isEmpty(title)) {
     errors.title = 'Title field is required';
   }
 
-  if (!Validator.isLength(data.description, { min: 30 })) {
+  if (!Validator.isLength(description, { min: 30 })) {
     errors.description = 'Description must be at least 30 characters';
   }
 
-  if (Validator.isEmpty(data.description)) {
+  if (Validator.isEmpty(description)) {
     errors.description = 'Description field is required';
   }
 
-  if (Validator.isEmpty(data.movieImage)) {
+  if (Validator.isEmpty(movieImage)) {
     errors.movieImage = 'Movie Image field is required';
   }
 

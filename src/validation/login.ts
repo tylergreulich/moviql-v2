@@ -2,21 +2,23 @@ import * as Validator from 'validator';
 import { User, AuthErrors } from '../interfaces/auth.interface';
 import { isEmpty } from './is-empty';
 
-export const validateLogin = (data: User) => {
+export const validateLogin = (authFields: User) => {
   let errors: AuthErrors = {};
 
-  data.email = !isEmpty(data.email) ? data.email : '';
-  data.password = !isEmpty(data.password) ? data.password : '';
+  const { email, passowrd } = authFields;
 
-  if (!Validator.isEmail(data.email)) {
+  email = !isEmpty(email) ? email : '';
+  password = !isEmpty(password) ? password : '';
+
+  if (!Validator.isEmail(email)) {
     errors.email = 'Email is invalid';
   }
 
-  if (Validator.isEmpty(data.email)) {
+  if (Validator.isEmpty(email)) {
     errors.email = 'Email field is required';
   }
 
-  if (Validator.isEmpty(data.password)) {
+  if (Validator.isEmpty(password)) {
     errors.password = 'Password field is required';
   }
 
