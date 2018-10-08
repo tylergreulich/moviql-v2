@@ -3,10 +3,8 @@ import { Movie, MovieErrors } from '../interfaces/movie.interface';
 import { isEmpty } from './is-empty';
 import { UserInputError } from 'apollo-server-express';
 
-export const validateMovie = (movieFields: Movie) => {
+export const validateMovie = ({ title, description, movieImage }: Movie) => {
   let errors: MovieErrors = {};
-
-  let { title, description, movieImage } = movieFields;
 
   title = !isEmpty(title) ? title : '';
   description = !isEmpty(description) ? description : '';

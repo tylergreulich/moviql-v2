@@ -2,10 +2,8 @@ import * as Validator from 'validator';
 import { Comment, CommentErrors } from '../interfaces/comment.interface';
 import { isEmpty } from './is-empty';
 
-export const validateComment = (commentFields: Comment) => {
+export const validateComment = ({ movieReview, movieRating }: Comment) => {
   let errors: CommentErrors = {};
-
-  let { movieReview, movieRating } = commentFields;
 
   movieReview = !isEmpty(movieReview) ? movieReview : '';
   movieRating = !isEmpty(movieRating) ? movieRating : '';

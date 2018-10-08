@@ -2,10 +2,8 @@ import * as Validator from 'validator';
 import { User, AuthErrors } from '../interfaces/auth.interface';
 import { isEmpty } from './is-empty';
 
-export const validateRegister = (authFields: User) => {
+export const validateRegister = ({ username, email, password }: User) => {
   let errors: AuthErrors = {};
-
-  let { username, email, password } = authFields;
 
   username = !isEmpty(username) ? username : '';
   email = !isEmpty(email) ? email : '';
