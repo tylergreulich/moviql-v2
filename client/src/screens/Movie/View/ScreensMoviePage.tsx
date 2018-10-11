@@ -18,8 +18,8 @@ import {
   MovieInfo
 } from 'src/components/UI/MoviePage/MoviePage';
 
-const MoviePage = (props: RouteComponentProps<any>) => {
-  const { imgUrl } = props.location.state;
+const MoviePage: React.SFC<RouteComponentProps<any>> = ({ location }) => {
+  const { imgUrl } = location.state;
 
   return (
     <>

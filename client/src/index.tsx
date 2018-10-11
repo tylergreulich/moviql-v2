@@ -40,12 +40,6 @@ const client = new ApolloClient({
   }
 });
 
-// const locationPaths = {
-//   home: '/',
-//   browseMovies: '/browse',
-//   viewMovie: '/browse/movie/:id'
-// };
-
 const Root = () => (
   <BrowserRouter>
     <Route

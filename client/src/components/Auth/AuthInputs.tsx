@@ -1,34 +1,16 @@
 import * as React from 'react';
 import { FormInput } from '../UI/HomePage/FormInputs';
+import { AuthInputProps } from '../../interfaces/Auth/AuthInputs.interface';
 
-interface AuthInputFieldProps {
-  email: string;
-  username?: string;
-  password: string;
-  confirmPassword?: string;
-}
-
-interface AuthInputErrorProps {
-  errors?: {
-    [key: string]: AuthInputFieldProps;
-  };
-}
-
-interface AuthInputUIProps {
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isRegisterForm?: boolean;
-  showPassword?: boolean;
-  onClick?: () => void;
-  endAdornment?: any;
-}
-
-type AuthInputProps = AuthInputFieldProps &
-  AuthInputErrorProps &
-  AuthInputUIProps;
-
-export const AuthInputs = (props: AuthInputProps) => {
-  const { email, username, password, errors, onChange, isRegisterForm } = props;
-
+export const AuthInputs: React.SFC<AuthInputProps> = ({
+  email,
+  username,
+  password,
+  errors,
+  onChange,
+  isRegisterForm,
+  showPassword
+}) => {
   let registerInputs;
   let loginInputs;
 
@@ -62,7 +44,7 @@ export const AuthInputs = (props: AuthInputProps) => {
             style={{ flex: '.45' }}
           />
           <FormInput
-            type={props.showPassword ? 'text' : 'password'}
+            type={showPassword ? 'text' : 'password'}
             error={!!errors!.password}
             label={errors!.password ? errors!.password : 'Password'}
             value={password}

@@ -25,3 +25,9 @@ export const UpcomingTitles = () => (
     </MovieCardWrapper>
   </>
 );
+
+interface TestProps {
+  id: string;
+}
+
+export const Test: React.SFC<TestProps> = ({ id }) => <div>Hello</div>;

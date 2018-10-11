@@ -5,9 +5,11 @@ import { ThemeWrapper } from 'src/components/UI/MaterialUI/Theme';
 
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
-const Navigation = (props: NavigationScreenProps) => {
-  const { history, location } = props;
-
+const Navigation: React.SFC<NavigationScreenProps> = ({
+  history,
+  location,
+  ...props
+}) => {
   return (
     <div style={{ flexGrow: 1, zIndex: 1, position: 'relative' }}>
       <ThemeWrapper>
