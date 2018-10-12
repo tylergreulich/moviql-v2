@@ -24,7 +24,7 @@ const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
   fetchOptions: {
     credentials: 'include'
-  },
+  }
   // request: (operation: Operation): any => {
   //   const token = localStorage.getItem('jwtToken');
   //   operation.setContext({
@@ -33,11 +33,6 @@ const client = new ApolloClient({
   //     }
   //   });
   // },
-  onError: ({ networkError }) => {
-    if (networkError) {
-      console.log('[Network Error]', networkError);
-    }
-  }
 });
 
 const Root = () => (
