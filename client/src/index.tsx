@@ -25,14 +25,6 @@ const client = new ApolloClient({
   fetchOptions: {
     credentials: 'include'
   }
-  // request: (operation: Operation): any => {
-  //   const token = localStorage.getItem('jwtToken');
-  //   operation.setContext({
-  //     headers: {
-  //       authorization: token
-  //     }
-  //   });
-  // },
 });
 
 const Root = () => (
@@ -77,8 +69,6 @@ const Root = () => (
     />
   </BrowserRouter>
 );
-
-// const RootWithSession = withSession(Root);
 
 ReactDOM.render(
   <ApolloProvider client={client}>

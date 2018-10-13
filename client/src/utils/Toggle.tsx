@@ -11,8 +11,8 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
   };
 
   public onToggleHandler = () => {
-    this.setState(prevState => ({
-      isOn: !prevState.isOn
+    this.setState(({ isOn }) => ({
+      isOn: !isOn
     }));
   };
 
