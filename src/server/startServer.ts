@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
 import { ApolloServer, gql } from 'apollo-server-express';
-import User from '../models/User';
-import Movie from '../models/Movie';
-import Comment from '../models/Comment';
+import User from '../modules/user/user.model';
+import Movie from '../modules/movie/movie.model';
+import Comment from '../modules/comment/comment.model';
 import { schema } from './createSchema';
 import { searchOriginalError } from '../utils/searchOriginalError';
 import { app } from './serverMiddleware';

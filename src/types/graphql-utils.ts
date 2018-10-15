@@ -1,5 +1,5 @@
-import User from '../models/User';
-import Movie from '../models/Movie';
+import User from '../modules/user/user.model';
+import Movie from '../modules/movie/movie.model';
 
 export interface ResolverMap {
   [key: string]: {

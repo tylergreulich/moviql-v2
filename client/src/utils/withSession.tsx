@@ -5,15 +5,15 @@ import { Query } from 'react-apollo';
 import getCurrentUser from 'src/queries/getCurrentUser';
 import { IMovie } from '../interfaces/shared/Movie.interface';
 
-interface GetCurrentUserData {
+interface GetCurrentUser {
   username: string;
   email: string;
   favorites: [IMovie];
   isAdmin: boolean;
 }
 
-export const withSession = (Component: any) => (props: any) => (
-  <Query<GetCurrentUserData, {}> query={getCurrentUser}>
+export const WithSession = (Component: any) => (props: any) => (
+  <Query<GetCurrentUser> query={getCurrentUser}>
     {({ data, loading, refetch }) => {
       if (loading || !data) {
         return null;

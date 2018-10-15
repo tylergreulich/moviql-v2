@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { Actor } from '../interfaces/actor.interface';
+import { Actor } from './actor.interface';
 
 const ActorSchema: Schema = new Schema({
   name: {

@@ -1,6 +1,5 @@
 import { Document } from 'mongoose';
 import { Response } from 'express';
-import { IPayload } from './payload.interface';
 
 export interface User extends Document {
   username: string;

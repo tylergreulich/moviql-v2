@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import { Schema, Document, model } from 'mongoose';
-import { User } from '../interfaces/auth.interface';
+import { User } from '../shared/auth.interface';
 import { Response } from 'express';
 
 const UserSchema: Schema = new Schema({
